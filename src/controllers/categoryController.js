@@ -1,6 +1,6 @@
-const categoryModel = require('../models/categoryModel');
+import categoryModel from "../models/categoryModel.js";
 
-module.exports = {
+const categoryController = {
   async create(req, res) {
     try {
       const category = await categoryModel.createCategory(req.body);
@@ -43,3 +43,5 @@ module.exports = {
     }
   },
 };
+
+export default categoryController;

@@ -1,6 +1,6 @@
-const exerciseModel = require('../models/exerciseModel');
+import exerciseModel from "../models/exerciseModel.js";
 
-module.exports = {
+const exerciseController = {
   async create(req, res) {
     try {
       const exercise = await exerciseModel.createExercise(req.body);
@@ -43,3 +43,5 @@ module.exports = {
     }
   },
 };
+
+export default exerciseController;

@@ -1,6 +1,6 @@
-const workoutModel = require('../models/workoutModel');
+import workoutModel from "../models/workoutModel.js";
 
-module.exports = {
+const workoutController = {
   async create(req, res) {
     try {
       const workout = await workoutModel.createWorkout(req.body);
@@ -43,3 +43,5 @@ module.exports = {
     }
   },
 };
+
+export default workoutController;

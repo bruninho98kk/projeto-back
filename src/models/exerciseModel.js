@@ -1,7 +1,7 @@
-const { PrismaClient } = require('@prisma/client');
+import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-module.exports = {
+const exerciseModel = {
   async createExercise(data) {
     return prisma.exercise.create({ data });
   },
@@ -18,3 +18,5 @@ module.exports = {
     return prisma.exercise.delete({ where: { id } });
   },
 };
+
+export default exerciseModel;
