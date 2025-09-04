@@ -83,8 +83,67 @@ model User {
   email    String @unique
   password String
 
+  workouts Workout[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("users")
+}
+
+model Workout {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercises   WorkoutExercise[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("workouts")
+}
+
+model Exercise {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  categoryId  Int
+  category    Category  @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  workouts    WorkoutExercise[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("exercises")
+}
+
+model Category {
+  id          Int       @id @default(autoincrement())
+  name        String    @unique
+  description String?
+
+  exercises   Exercise[]
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("categories")
+}
+
+model WorkoutExercise {
+  id          Int       @id @default(autoincrement())
+  workoutId   Int
+  workout     Workout   @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  exerciseId  Int
+  exercise    Exercise  @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  sets        Int
+  reps        Int
+  weight      Float?
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("workout_exercises")
 }
